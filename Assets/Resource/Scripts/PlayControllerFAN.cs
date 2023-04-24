@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController1 : MonoBehaviour
+public class PlayControllerFAN : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
@@ -10,11 +12,11 @@ public class PlayerController1 : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded;
-   
+    private bool isWhite = true;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    private Vector2 movement;
-    public bool Switched = false;
+    private bool isFirstXKeyPress = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,34 +33,18 @@ public class PlayerController1 : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-       
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             InteractWithObject();
         }
-    
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            ToggleSwitch();
+            ToggleColor();
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
-
-        // Set the isMoving parameter based on player input
-        animator.SetBool("isMoving", Mathf.Abs(moveInput) > 0);
-        // Set the isGrounded parameter
-        animator.SetBool("isGrounded", isGrounded);
-     animator.SetBool("switched",Switched);
-        // Flip the sprite based on the movement direction
-        if (moveInput > 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (moveInput < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
     }
 
     private void InteractWithObject()
@@ -72,18 +58,25 @@ public class PlayerController1 : MonoBehaviour
         }
     }
 
-    private void ToggleSwitch()
+    private void ToggleColor()
     {
-        if (Switched)
+        if (isFirstXKeyPress)
         {
-         
-          
-            Switched = false;
+            isFirstXKeyPress = false;
         }
         else
         {
-     
-           Switched= true;
+
+            if (isWhite)
+            {
+                spriteRenderer.color = Color.black;
+                isWhite = false;
+            }
+            else
+            {
+                spriteRenderer.color = Color.white;
+                isWhite = true;
+            }
         }
     }
 }

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - GameOver
+  - Win
+  - SPGround
   layers:
   - Default
   - TransparentFX

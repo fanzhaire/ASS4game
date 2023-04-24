@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController1 : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
@@ -10,7 +10,7 @@ public class PlayerController1 : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded;
-   
+
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private Vector2 movement;
@@ -31,13 +31,13 @@ public class PlayerController1 : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-       
+
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             InteractWithObject();
         }
-    
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             ToggleSwitch();
@@ -49,7 +49,7 @@ public class PlayerController1 : MonoBehaviour
         animator.SetBool("isMoving", Mathf.Abs(moveInput) > 0);
         // Set the isGrounded parameter
         animator.SetBool("isGrounded", isGrounded);
-     animator.SetBool("switched",Switched);
+        animator.SetBool("switched", Switched);
         // Flip the sprite based on the movement direction
         if (moveInput > 0)
         {
@@ -76,14 +76,15 @@ public class PlayerController1 : MonoBehaviour
     {
         if (Switched)
         {
-         
-          
+
+
             Switched = false;
         }
         else
         {
-     
-           Switched= true;
+
+            Switched = true;
         }
     }
 }
+
